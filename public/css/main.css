@@ -1,0 +1,29 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.bg-gradient-main {
+    background: linear-gradient(90deg, #d946ef 0%, #8b5cf6 100%);
+    /* d946ef = fuchsia, 8b5cf6 = violet */
+    color: white;
+}
+
+.bg-primary {
+    background-color: #4f46e5 !important;
+    /* 4f46e5 = indigo */
+}
+
+.text-primary {
+    color: #4f46e5 !important;
+    /* 4f46e5 = indigo */
+}
+
+.icon-lg {
+    width: auto;
+    height: 1.5rem;
+}
+.icon-xl {
+    width: 3rem;
+    height: 3rem;
+    fill: currentColor;
+}
