@@ -27,12 +27,14 @@
         Manage
     </div>
 
-    <!-- Nav Item - User Management -->
+    <!-- Nav Item - User Management (Admin Only) -->
+    @if(auth()->user()->isAdmin())
     <li class="nav-item">
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fa-solid fa-users"></i>
             <span>User</span></a>
     </li>
+    @endif
 
     <!-- Nav Item - Dosen Management (Admin Only) -->
     @if(auth()->user()->isAdmin())
@@ -43,16 +45,14 @@
     </li>
     @endif
 
-    <!-- Nav Item - Mahasiswa Management (Admin Only) -->
-    @if(auth()->user()->isAdmin())
+    <!-- Nav Item - Mahasiswa Management (Admin & Staff) -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('mahasiswa.index') }}">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Mahasiswa</span></a>
     </li>
-    @endif
 
-    <!-- Nav Item - Kampus Management -->
+    <!-- Nav Item - Kampus Management (Admin & Staff) -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('kampus.index') }}">
             <i class="fa-solid fa-school"></i>

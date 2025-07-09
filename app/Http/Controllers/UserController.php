@@ -14,8 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Check if user has permission to access user management
-        if (!Auth::user()->isAdmin() && !Auth::user()->isStaff()) {
+        // Check if user has permission to access user management (Only ADMIN)
+        if (!Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized access');
         }
 
@@ -28,8 +28,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        // Check if user has permission to create users
-        if (!Auth::user()->isAdmin() && !Auth::user()->isStaff()) {
+        // Check if user has permission to create users (Only ADMIN)
+        if (!Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized access');
         }
 
@@ -42,8 +42,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Check if user has permission to create users
-        if (!Auth::user()->isAdmin() && !Auth::user()->isStaff()) {
+        // Check if user has permission to create users (Only ADMIN)
+        if (!Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized access');
         }
 
@@ -69,8 +69,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        // Check if user has permission to view users
-        if (!Auth::user()->isAdmin() && !Auth::user()->isStaff()) {
+        // Check if user has permission to view users (Only ADMIN)
+        if (!Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized access');
         }
 
@@ -82,8 +82,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // Check if user has permission to edit users
-        if (!Auth::user()->isAdmin() && !Auth::user()->isStaff()) {
+        // Check if user has permission to edit users (Only ADMIN)
+        if (!Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized access');
         }
 
@@ -97,8 +97,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Check if user has permission to update users
-        if (!Auth::user()->isAdmin() && !Auth::user()->isStaff()) {
+        // Check if user has permission to update users (Only ADMIN)
+        if (!Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized access');
         }
 
@@ -131,8 +131,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // Check if user has permission to delete users
-        if (!Auth::user()->isAdmin() && !Auth::user()->isStaff()) {
+        // Check if user has permission to delete users (Only ADMIN)
+        if (!Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized access');
         }
 

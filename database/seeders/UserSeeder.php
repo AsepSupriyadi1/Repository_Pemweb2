@@ -31,18 +31,6 @@ class UserSeeder extends Seeder
             ]
         );
 
-        // Create demo user
-        User::updateOrCreate(
-            ['email' => 'demo@demo.com'],
-            [
-                'name' => 'Demo User',
-                'email' => 'demo@demo.com',
-                'password' => Hash::make('demo12345'),
-                'role' => 'STAFF',
-                'email_verified_at' => now(),
-            ]
-        );
-
         // Create staff user
         User::updateOrCreate(
             ['email' => 'staff@staff.com'],
@@ -54,21 +42,5 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
-
-        // Generate 52 additional users (total 55 users)
-        for ($i = 1; $i <= 52; $i++) {
-            $firstName = $faker->firstName();
-            $lastName = $faker->lastName();
-            $name = $firstName . ' ' . $lastName;
-            $email = strtolower($firstName . '.' . $lastName . $i . '@example.com');
-
-            User::create([
-                'name' => $name,
-                'email' => $email,
-                'password' => Hash::make('password123'),
-                'role' => $faker->randomElement(['ADMIN', 'STAFF']),
-                'email_verified_at' => $faker->optional(0.8)->dateTimeBetween('-1 year', 'now'),
-            ]);
-        }
     }
 }

@@ -32,8 +32,8 @@ class RoleMiddleware
         // Staff can only access specific resources
         if ($user->isStaff()) {
             $allowedRoutes = [
-                'users.index', 'users.create', 'users.store', 'users.edit', 
-                'users.update', 'users.destroy', 'users.show',
+                'mahasiswa.index', 'mahasiswa.create', 'mahasiswa.store', 'mahasiswa.edit', 
+                'mahasiswa.update', 'mahasiswa.destroy', 'mahasiswa.show',
                 'kampus.index', 'kampus.create', 'kampus.store', 'kampus.edit', 
                 'kampus.update', 'kampus.destroy',
                 'dashboard'
