@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             ['email' => 'admin@admin.com'],
             [
                 'name' => 'Administrator',
-                'email' => 'admin@admin.com',
+                'email' => 'admin@pddikti.com',
                 'password' => Hash::make('password12345'),
                 'role' => 'ADMIN',
                 'email_verified_at' => now(),
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             ['email' => 'staff@staff.com'],
             [
                 'name' => 'Staff User',
-                'email' => 'staff@staff.com',
+                'email' => 'staff@pddikti.com',
                 'password' => Hash::make('staff12345'),
                 'role' => 'STAFF',
                 'email_verified_at' => now(),
