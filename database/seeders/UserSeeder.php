@@ -20,23 +20,43 @@ class UserSeeder extends Seeder
         $faker = Faker::create('id_ID');
 
         // Create admin user
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password12345'),
-            'email_verified_at' => now(),
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@admin.com'],
+            [
+                'name' => 'Administrator',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('password12345'),
+                'role' => 'ADMIN',
+                'email_verified_at' => now(),
+            ]
+        );
 
         // Create demo user
-        User::create([
-            'name' => 'Demo User',
-            'email' => 'demo@demo.com',
-            'password' => Hash::make('demo12345'),
-            'email_verified_at' => now(),
-        ]);
+        User::updateOrCreate(
+            ['email' => 'demo@demo.com'],
+            [
+                'name' => 'Demo User',
+                'email' => 'demo@demo.com',
+                'password' => Hash::make('demo12345'),
+                'role' => 'STAFF',
+                'email_verified_at' => now(),
+            ]
+        );
 
-        // Generate 53 additional users (total 55 users)
-        for ($i = 1; $i <= 53; $i++) {
+        // Create staff user
+        User::updateOrCreate(
+            ['email' => 'staff@staff.com'],
+            [
+                'name' => 'Staff User',
+                'email' => 'staff@staff.com',
+                'password' => Hash::make('staff12345'),
+                'role' => 'STAFF',
+                'email_verified_at' => now(),
+            ]
+        );
+
+        // Generate 52 additional users (total 55 users)
+        for ($i = 1; $i <= 52; $i++) {
             $firstName = $faker->firstName();
             $lastName = $faker->lastName();
             $name = $firstName . ' ' . $lastName;
@@ -46,6 +66,7 @@ class UserSeeder extends Seeder
                 'name' => $name,
                 'email' => $email,
                 'password' => Hash::make('password123'),
+                'role' => $faker->randomElement(['ADMIN', 'STAFF']),
                 'email_verified_at' => $faker->optional(0.8)->dateTimeBetween('-1 year', 'now'),
             ]);
         }

@@ -521,9 +521,12 @@ class KampusSeeder extends Seeder
         ];
 
         foreach ($kampuses as $kampus) {
-            Kampus::create($kampus);
+            Kampus::updateOrCreate(
+                ['kode_pt' => $kampus['kode_pt']], // Find by kode_pt
+                $kampus // Update or create with this data
+            );
         }
 
-        $this->command->info('✅ Created ' . count($kampuses) . ' universities successfully!');
+        $this->command->info('✅ Created/Updated ' . count($kampuses) . ' universities successfully!');
     }
 }

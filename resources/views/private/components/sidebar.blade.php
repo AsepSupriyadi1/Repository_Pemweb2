@@ -27,25 +27,32 @@
         Manage
     </div>
 
-    <!-- Nav Item - Dashboard -->
+    <!-- Nav Item - User Management -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.index') }}">
+        <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fa-solid fa-users"></i>
             <span>User</span></a>
     </li>
 
+    <!-- Nav Item - Dosen Management (Admin Only) -->
+    @if(auth()->user()->isAdmin())
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dosen.index') }}">
             <i class="fa-solid fa-chalkboard-user"></i>
             <span>Dosen</span></a>
     </li>
+    @endif
 
+    <!-- Nav Item - Mahasiswa Management (Admin Only) -->
+    @if(auth()->user()->isAdmin())
     <li class="nav-item">
         <a class="nav-link" href="{{ route('mahasiswa.index') }}">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Mahasiswa</span></a>
     </li>
+    @endif
 
+    <!-- Nav Item - Kampus Management -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('kampus.index') }}">
             <i class="fa-solid fa-school"></i>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\KampusController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -41,15 +42,18 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::controller(MahasiswaController::class)->group(function () {
-        Route::get('/mahasiswa', 'index')->name('mahasiswa.index');
-        Route::get('/mahasiswa/create', 'create')->name('mahasiswa.create');
-        Route::post('/mahasiswa/store', 'store')->name('mahasiswa.store');
-        Route::get('/mahasiswa/edit/{id}', 'edit')->name('mahasiswa.edit');
-        Route::post('/mahasiswa/update/{id}', 'update')->name('mahasiswa.update');
-        Route::get('/mahasiswa/delete/{id}', 'destroy')->name('mahasiswa.delete');
+    // User Management - Available to both ADMIN and STAFF
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users', 'index')->name('users.index');
+        Route::get('/users/create', 'create')->name('users.create');
+        Route::post('/users/store', 'store')->name('users.store');
+        Route::get('/users/{id}', 'show')->name('users.show');
+        Route::get('/users/edit/{id}', 'edit')->name('users.edit');
+        Route::post('/users/update/{id}', 'update')->name('users.update');
+        Route::get('/users/delete/{id}', 'destroy')->name('users.delete');
     });
 
+    // Kampus Management - Available to both ADMIN and STAFF
     Route::controller(KampusController::class)->group(function () {
         Route::get('/kampus', 'index')->name('kampus.index');
         Route::get('/kampus/create', 'create')->name('kampus.create');
@@ -59,16 +63,31 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kampus/delete/{id}', 'destroy')->name('kampus.delete');
     });
 
-    Route::controller(DosenController::class)->group(function () {
-        Route::get('/dosen', 'index')->name('dosen.index');
-        Route::get('/dosen/create', 'create')->name('dosen.create');
-        Route::post('/dosen/store', 'store')->name('dosen.store');
-        Route::get('/dosen/edit/{id}', 'edit')->name('dosen.edit');
-        Route::post('/dosen/update/{id}', 'update')->name('dosen.update');
-        Route::get('/dosen/delete/{id}', 'destroy')->name('dosen.delete');
+    // Mahasiswa Management - Only ADMIN can access
+    Route::middleware(['role:ADMIN'])->group(function () {
+        Route::controller(MahasiswaController::class)->group(function () {
+            Route::get('/mahasiswa', 'index')->name('mahasiswa.index');
+            Route::get('/mahasiswa/create', 'create')->name('mahasiswa.create');
+            Route::post('/mahasiswa/store', 'store')->name('mahasiswa.store');
+            Route::get('/mahasiswa/edit/{id}', 'edit')->name('mahasiswa.edit');
+            Route::post('/mahasiswa/update/{id}', 'update')->name('mahasiswa.update');
+            Route::get('/mahasiswa/delete/{id}', 'destroy')->name('mahasiswa.delete');
+        });
     });
 
-    // Report Routes
+    // Dosen Management - Only ADMIN can access
+    Route::middleware(['role:ADMIN'])->group(function () {
+        Route::controller(DosenController::class)->group(function () {
+            Route::get('/dosen', 'index')->name('dosen.index');
+            Route::get('/dosen/create', 'create')->name('dosen.create');
+            Route::post('/dosen/store', 'store')->name('dosen.store');
+            Route::get('/dosen/edit/{id}', 'edit')->name('dosen.edit');
+            Route::post('/dosen/update/{id}', 'update')->name('dosen.update');
+            Route::get('/dosen/delete/{id}', 'destroy')->name('dosen.delete');
+        });
+    });
+
+    // Dashboard - Available to both ADMIN and STAFF
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [ReportController::class, 'index'])->name('dashboard');
         Route::post('/generate', [ReportController::class, 'generate'])->name('reports.generate');
