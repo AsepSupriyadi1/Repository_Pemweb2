@@ -19,7 +19,7 @@ class UserController extends Controller
             abort(403, 'Unauthorized access');
         }
 
-        $users = User::orderBy('name')->get();
+        $users = User::orderBy('created_at', 'desc')->get();
         return view('private.users.index', compact('users'));
     }
 

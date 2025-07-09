@@ -10,7 +10,7 @@ class KampusController extends Controller
     public function index()
     {
         // Ambil semua data kampus dari database
-        $kampus = Kampus::all();
+        $kampus = Kampus::orderBy('created_at', 'desc')->get();
 
         // Kirim data kampus ke view
         return view('private.kampus.index', compact('kampus'));

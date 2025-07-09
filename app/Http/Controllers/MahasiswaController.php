@@ -11,7 +11,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         // Ambil semua data mahasiswa dari database
-        $mahasiswas = Mahasiswa::all();
+        $mahasiswas = Mahasiswa::orderBy('created_at', 'desc')->get();
 
         // Kirim data mahasiswa ke view
         return view('private.mahasiswa.index', compact('mahasiswas'));

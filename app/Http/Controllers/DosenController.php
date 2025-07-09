@@ -11,7 +11,7 @@ class DosenController extends Controller
     public function index()
     {
         // Ambil semua data dosen dari database
-        $dosens = Dosen::with('kampus')->get();
+        $dosens = Dosen::with('kampus')->orderBy('created_at', 'desc')->get();
 
         // Kirim data dosen ke view
         return view('private.dosen.index', compact('dosens'));
