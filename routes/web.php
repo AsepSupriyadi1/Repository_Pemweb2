@@ -33,8 +33,6 @@ Route::get('/search', [SearchController::class, 'search'])->name('public.search'
 
 Route::controller(AuthController::class)->group(function () {
     Route::middleware('guest')->group(function () {
-        Route::get('/register', 'register')->name('public.register');
-        Route::post('/register', 'registerPost')->name('register.post');
         Route::get('/login', 'login')->name('public.login');
         Route::post('/login', 'loginPost')->name('login.post');
     });
@@ -76,17 +74,5 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/generate', [ReportController::class, 'generate'])->name('reports.generate');
         Route::get('/summary', [ReportController::class, 'summary'])->name('reports.summary');
     });
-
-    // Test route for dashboard (works without database)
-    Route::get('/dashboard/test', function () {
-        return view('private.reports.index', [
-            'kampuses' => collect([
-                (object)['id' => 1, 'nama_kampus' => 'Universitas Indonesia', 'kota' => 'Depok'],
-                (object)['id' => 2, 'nama_kampus' => 'Institut Teknologi Bandung', 'kota' => 'Bandung'],
-                (object)['id' => 3, 'nama_kampus' => 'Universitas Gadjah Mada', 'kota' => 'Yogyakarta']
-            ]),
-            'angkatans' => collect(['2024', '2023', '2022', '2021', '2020'])
-        ]);
-    })->name('dashboard.test');
 });
 

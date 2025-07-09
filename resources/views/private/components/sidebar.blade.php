@@ -29,6 +29,18 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('user.index') }}">
+            <i class="fa-solid fa-users"></i>
+            <span>User</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('dosen.index') }}">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span>Dosen</span></a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('mahasiswa.index') }}">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Mahasiswa</span></a>
