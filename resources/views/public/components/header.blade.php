@@ -7,9 +7,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Statistik</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Panduan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Kontak</a></li>
             </ul>
         </div>
     </div>

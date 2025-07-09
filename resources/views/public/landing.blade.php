@@ -121,7 +121,7 @@
                 <div class="p-4 rounded text-center" style="background-color: #06b6d4;">
                     <x-bi-person class="icon-lg" />
                     <div>Mahasiswa</div>
-                    <div class="fw-bold fs-5">0</div>
+                    <div class="fw-bold fs-5">350.418</div>
                 </div>
             </div>
             <div class="col-md-3 mb-3">

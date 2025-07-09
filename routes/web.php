@@ -7,6 +7,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DetailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,13 @@ Route::get('/', function () {
 
 
 Route::get('/search', [SearchController::class, 'search'])->name('public.search');
+
+// Public Detail Pages
+Route::controller(DetailController::class)->group(function () {
+    Route::get('/kampus/{id}', 'kampus')->name('public.kampus.detail');
+    Route::get('/mahasiswa/{id}', 'mahasiswa')->name('public.mahasiswa.detail');
+    Route::get('/dosen/{id}', 'dosen')->name('public.dosen.detail');
+});
 
 Route::controller(AuthController::class)->group(function () {
     Route::middleware('guest')->group(function () {

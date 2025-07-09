@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DummyData;
 use App\Models\Kampus;
 use App\Models\Mahasiswa;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -41,8 +42,14 @@ class SearchController extends Controller
         // Cari data kampus berdasarkan nama kampus
         $kampus = Kampus::where('nama_kampus', 'like', '%' . $keyword . '%')->get();
 
-        // Kirim data mahasiswa ke view
-        return view('public.search', compact('mahasiswa', 'kampus', 'keyword'));
+        // Cari data dosen berdasarkan nidn atau nama
+        $dosen = Dosen::with('kampus')
+            ->where('nidn', 'like', '%' . $keyword . '%')
+            ->orWhere('nama', 'like', '%' . $keyword . '%')
+            ->get();
+
+        // Kirim data mahasiswa, kampus, dan dosen ke view
+        return view('public.search', compact('mahasiswa', 'kampus', 'dosen', 'keyword'));
     }
 
 }
