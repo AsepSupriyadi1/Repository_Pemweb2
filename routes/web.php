@@ -65,33 +65,33 @@ Route::middleware(['auth'])->group(function () {
 
     // Kampus Management - Available to both ADMIN and STAFF
     Route::controller(KampusController::class)->group(function () {
-        Route::get('/kampus', 'index')->name('kampus.index');
-        Route::get('/kampus/create', 'create')->name('kampus.create');
-        Route::post('/kampus/store', 'store')->name('kampus.store');
-        Route::get('/kampus/edit/{id}', 'edit')->name('kampus.edit');
-        Route::post('/kampus/update/{id}', 'update')->name('kampus.update');
-        Route::get('/kampus/delete/{id}', 'destroy')->name('kampus.delete');
+        Route::get('/campuses', 'index')->name('kampus.index');
+        Route::get('/campuses/create', 'create')->name('kampus.create');
+        Route::post('/campuses/store', 'store')->name('kampus.store');
+        Route::get('/campuses/edit/{id}', 'edit')->name('kampus.edit');
+        Route::post('/campuses/update/{id}', 'update')->name('kampus.update');
+        Route::get('/campuses/delete/{id}', 'destroy')->name('kampus.delete');
     });
 
     // Mahasiswa Management - Available to both ADMIN and STAFF
     Route::controller(MahasiswaController::class)->group(function () {
-        Route::get('/mahasiswa', 'index')->name('mahasiswa.index');
-        Route::get('/mahasiswa/create', 'create')->name('mahasiswa.create');
-        Route::post('/mahasiswa/store', 'store')->name('mahasiswa.store');
-        Route::get('/mahasiswa/edit/{id}', 'edit')->name('mahasiswa.edit');
-        Route::post('/mahasiswa/update/{id}', 'update')->name('mahasiswa.update');
-        Route::get('/mahasiswa/delete/{id}', 'destroy')->name('mahasiswa.delete');
+        Route::get('/students', 'index')->name('mahasiswa.index');
+        Route::get('/students/create', 'create')->name('mahasiswa.create');
+        Route::post('/students/store', 'store')->name('mahasiswa.store');
+        Route::get('/students/edit/{id}', 'edit')->name('mahasiswa.edit');
+        Route::post('/students/update/{id}', 'update')->name('mahasiswa.update');
+        Route::get('/students/delete/{id}', 'destroy')->name('mahasiswa.delete');
     });
 
     // Dosen Management - Only ADMIN can access
     Route::middleware(['role:ADMIN'])->group(function () {
         Route::controller(DosenController::class)->group(function () {
-            Route::get('/dosen', 'index')->name('dosen.index');
-            Route::get('/dosen/create', 'create')->name('dosen.create');
-            Route::post('/dosen/store', 'store')->name('dosen.store');
-            Route::get('/dosen/edit/{id}', 'edit')->name('dosen.edit');
-            Route::post('/dosen/update/{id}', 'update')->name('dosen.update');
-            Route::get('/dosen/delete/{id}', 'destroy')->name('dosen.delete');
+            Route::get('/lecturers', 'index')->name('dosen.index');
+            Route::get('/lecturers/create', 'create')->name('dosen.create');
+            Route::post('/lecturers/store', 'store')->name('dosen.store');
+            Route::get('/lecturers/edit/{id}', 'edit')->name('dosen.edit');
+            Route::post('/lecturers/update/{id}', 'update')->name('dosen.update');
+            Route::get('/lecturers/delete/{id}', 'destroy')->name('dosen.delete');
         });
     });
 
