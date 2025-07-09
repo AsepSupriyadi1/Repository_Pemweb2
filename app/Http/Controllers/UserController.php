@@ -33,7 +33,8 @@ class UserController extends Controller
             abort(403, 'Unauthorized access');
         }
 
-        $roles = User::getRoles();
+        // Only STAFF role is available for creation
+        $roles = ['STAFF' => 'Staff'];
         return view('private.users.create', compact('roles'));
     }
 
@@ -51,17 +52,17 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:ADMIN,STAFF',
         ]);
 
+        // Force role to STAFF - no ADMIN creation allowed
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => 'STAFF',
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'Staff user created successfully.');
     }
 
     /**
@@ -88,7 +89,14 @@ class UserController extends Controller
         }
 
         $user = User::findOrFail($id);
-        $roles = User::getRoles();
+        
+        // If editing an ADMIN user, don't allow role change
+        if ($user->role === 'ADMIN') {
+            $roles = ['ADMIN' => 'Admin'];
+        } else {
+            $roles = ['STAFF' => 'Staff'];
+        }
+        
         return view('private.users.edit', compact('user', 'roles'));
     }
 
@@ -108,13 +116,13 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
-            'role' => 'required|in:ADMIN,STAFF',
         ]);
 
         $data = [
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role,
+            // Keep existing role - don't allow role changes
+            'role' => $user->role,
         ];
 
         if ($request->filled('password')) {
@@ -143,8 +151,13 @@ class UserController extends Controller
             return redirect()->route('users.index')->with('error', 'Cannot delete your own account.');
         }
 
+        // Prevent deleting any ADMIN user
+        if ($user->role === 'ADMIN') {
+            return redirect()->route('users.index')->with('error', 'Cannot delete admin accounts.');
+        }
+
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'Staff user deleted successfully.');
     }
 }

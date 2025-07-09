@@ -10,6 +10,13 @@
                     <div class="pb-3">
                         <h4>Edit Data User</h4>
                         <p class="mb-4">Silahkan ubah data-data berikut untuk memperbarui data user.</p>
+                        
+                        @if($user->role === 'ADMIN')
+                            <div class="alert alert-warning">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Perhatian:</strong> Anda sedang mengedit akun Admin. Role tidak dapat diubah.
+                            </div>
+                        @endif
                     </div>
 
                     @if(session('error'))
@@ -67,21 +74,11 @@
                                     <label for="role">
                                         Role:
                                     </label>
-                                    <select class="form-control form-control-user @error('role') is-invalid @enderror"
-                                            name="role" id="role">
-                                        <option value="">- Pilih Role -</option>
-                                        @foreach($roles as $key => $value)
-                                            <option value="{{ $key }}" {{ old('role', $user->role) == $key ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                    @error('role')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                    <input type="text" 
+                                           class="form-control form-control-user"
+                                           value="{{ $user->role === 'ADMIN' ? 'Admin' : 'Staff' }}" 
+                                           readonly>
+                                    <small class="form-text text-muted">Role tidak dapat diubah</small>
                                 </div>
                             </div>
 

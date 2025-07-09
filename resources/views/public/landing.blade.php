@@ -8,8 +8,8 @@
             <p class="lead">Cari informasi mahasiswa, perguruan tinggi, dan program studi di seluruh Indonesia</p>
             <form class="row justify-content-center mt-4" action="{{ route('public.search') }}" method="GET">
                 <div class="col-md-6 mb-2">
-                    <input type="text" class="form-control py-3" placeholder="Masukkan NIM atau Nama Mahasiswa"
-                        name="keyword" required>
+                    <input type="text" class="form-control py-3"
+                        placeholder="Masukkan NIM, Nama Mahasiswa, NIDN, atau Nama Dosen" name="keyword" required>
                 </div>
                 <div class="col-md-auto">
                     <button type="submit" class="btn btn-light text-primary fw-semibold py-3">Cari</button>

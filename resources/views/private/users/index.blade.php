@@ -7,7 +7,7 @@
         <h1 class="h3 mb-0 text-gray-800">Data User</h1>
         <a href="{{ route('users.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fa-solid fa-plus pe-2"></i>
-            <span>Tambah data</span>
+            <span>Tambah Staff</span>
         </a>
     </div>
     <!-- End of Page Heading -->
@@ -18,10 +18,16 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        Halaman manage data user (Create, Read, Update, Delete)
+                        Halaman manage data user (Admin dapat mengelola Staff)
                     </h6>
                 </div>
                 <div class="card-body">
+                    
+                    <!-- Info Alert -->
+                    <div class="alert alert-info mb-3">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Informasi:</strong> Hanya ada satu Admin dalam sistem. Semua user baru akan memiliki role Staff.
+                    </div>
 
                     <!-- Success Alert -->
                     @if(session('success'))
@@ -63,15 +69,20 @@
                                             <span class="badge badge-{{ $user->role == 'ADMIN' ? 'success' : 'info' }}">
                                                 {{ $user->role }}
                                             </span>
+                                            @if($user->role === 'ADMIN')
+                                                <small class="text-muted d-block">System Administrator</small>
+                                            @endif
                                         </td>
                                         <td>{{ $user->created_at->format('Y-m-d H:i') }}</td>
                                         <td>
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                            @if($user->id !== auth()->id())
+                                            @if($user->id !== auth()->id() && $user->role !== 'ADMIN')
                                                 <form action="{{ route('users.delete', $user->id) }}" method="GET" style="display: inline;">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus staff ini?')">Delete</button>
                                                 </form>
+                                            @elseif($user->role === 'ADMIN')
+                                                <span class="badge badge-secondary">Protected</span>
                                             @endif
                                         </td>
                                     </tr>

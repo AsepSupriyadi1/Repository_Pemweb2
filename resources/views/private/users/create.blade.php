@@ -8,8 +8,13 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="pb-3">
-                        <h4>Tambah data user</h4>
-                        <p class="mb-4">Silahkan isi data-data berikut untuk menambahkan data user baru.</p>
+                        <h4>Tambah Staff User</h4>
+                        <p class="mb-4">Silahkan isi data-data berikut untuk menambahkan staff user baru. Semua user yang dibuat akan memiliki role Staff.</p>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Catatan:</strong> Semua user baru akan otomatis memiliki role Staff. Hanya ada satu Admin dalam sistem.
+                        </div>
                     </div>
 
                     @if(session('error'))
@@ -67,21 +72,11 @@
                                     <label for="role">
                                         Role:
                                     </label>
-                                    <select class="form-control form-control-user @error('role') is-invalid @enderror"
-                                            name="role" id="role">
-                                        <option value="">- Pilih Role -</option>
-                                        @foreach($roles as $key => $value)
-                                            <option value="{{ $key }}" {{ old('role') == $key ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                    @error('role')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                    <input type="text" 
+                                           class="form-control form-control-user"
+                                           value="Staff" 
+                                           readonly>
+                                    <small class="form-text text-muted">Semua user baru akan memiliki role Staff</small>
                                 </div>
                             </div>
 
@@ -121,7 +116,7 @@
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    Tambah User
+                                    Tambah Staff
                                 </button>
                             </div>
                             <div class="col-sm-6">

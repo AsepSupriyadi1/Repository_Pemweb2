@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Administrator',
                 'email' => 'admin@pddikti.com',
-                'password' => Hash::make('password12345'),
+                'password' => Hash::make('admin12345'),
                 'role' => 'ADMIN',
                 'email_verified_at' => now(),
             ]
